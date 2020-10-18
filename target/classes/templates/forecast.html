@@ -1,0 +1,96 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html xmlns:th="https://thymleaf.org">
+<head>
+<title>Weather Report</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Flatty Weather Report template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link th:href="@{css/style.css}" rel="stylesheet" type="text/css" media="all" /> 
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link th:href='@{//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic}' rel='stylesheet' type='text/css'>
+<!-- //web font -->
+<!-- js -->   
+<script th:src="@{js/jquery-2.1.4.min.js}"></script>
+<script th:src="@{js/skycons.js}"></script> <!-- skycons-icons --> 	
+<!-- //js -->  
+</head>
+<body>
+	<!-- w3ls-weather -->
+	<div class="w3ls-weather">
+		<h1>Weather Report</h1>
+		<div class="w3ls-weather-agileinfo"> 
+			<div class="weather-left">
+				<div class="weather-left-text">
+					<h4 th:text="${f?.city?.name}+','+${f?.city?.country}">Los Angeles, USA </h4>
+					<h5 th:text="${f?.list[0].dtTxt}">Sunday, 12th March </h5>
+				</div>
+				<ul class="report">
+					<li><a href="#" th:text="${#numbers.formatDecimal(f?.list[0].main.temp-273.15, 0, 'COMMA', 2, 'POINT')} +' °C'">0 °C</a></li>
+					<li><a href="#"><span th:text="${#numbers.formatDecimal((f?.list[0].main.temp-273.5)*9/5+32, 0, 'COMMA', 2, 'POINT')}">0</span> °F</a></li>
+				</ul>
+			</div>
+			<div class="weather-right">
+				<ul>
+					<li>
+						<figure class="icons">
+<!-- 							<canvas id="partly-cloudy-day" width="60" height="60"></canvas> -->
+							<img th:alt="${f?.list[0].weather[0].icon}" th:src="'http://openweathermap.org/img/w/'+${f?.list[0].weather[0].icon}+'.png'" />
+						</figure>
+						<h3 th:text="${#numbers.formatDecimal(f?.list[0].main.temp-273.15, 0, 'COMMA', 2, 'POINT')} +' °C'">25 °C</h3>
+						<div class="clear"></div>
+					</li>
+					<li th:each="i:${f?.list}" th:if="${i.dtTxt}==${f?.list[0].tomarrow()}">
+						<figure class="icons">
+<!-- 							<canvas id="clear-day" width="40" height="40"></canvas> -->
+								<img th:alt="${i.weather[0].icon}" th:src="'http://openweathermap.org/img/w/'+${i.weather[0].icon}+'.png'" />
+						</figure>
+						<div class="weather-text" >
+							<h4 th:text="${#dates.dayOfWeekNameShort(i.dtTxt)}">WED</h4>
+							<h5 th:text="${#numbers.formatDecimal(i.main.temp-273.15, 0, 'COMMA', 2, 'POINT')} +' °C'">27 °C</h5>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li th:each="j:${f?.list}" th:if="${j.dtTxt}==${f?.list[0].dayAfterTomarrow()}">
+						<figure class="icons">
+<!-- 							<canvas id="snow" width="40" height="40"></canvas> -->
+								<img th:alt="${j.weather[0].icon}" th:src="'http://openweathermap.org/img/w/'+${j.weather[0].icon}+'.png'" />
+						</figure>
+						<div class="weather-text">
+							<h4 th:text="${#dates.dayOfWeekNameShort(j.dtTxt)}">THR</h4>
+							<h5 th:text="${#numbers.formatDecimal(j.main.temp-273.15, 0, 'COMMA', 2, 'POINT')} +' °C'" >13 °C</h5>
+						</div>
+						<div class="clear"></div>
+					</li>
+					<li th:each="k:${f?.list}" th:if="${k.dtTxt}==${f?.list[0].nextDayAfterTomarrow()}">
+						<figure class="icons">
+<!-- 							<canvas id="partly-cloudy-night" width="40" height="40"></canvas> -->
+								<img th:alt="${k.weather[0].icon}" th:src="'http://openweathermap.org/img/w/'+${k.weather[0].icon}+'.png'" />
+						</figure>
+						<div class="weather-text">
+							<h4 th:text="${#dates.dayOfWeekNameShort(k.dtTxt)}">FRI</h4>
+							<h5 th:text="${#numbers.formatDecimal(k.main.temp-273.15, 0, 'COMMA', 2, 'POINT')} +' °C'">18 °C</h5>
+						</div>
+						<div class="clear"></div>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+		</div>  
+	</div>	
+	<!-- //w3ls-weather --> 
+	<!-- copyright -->
+	<div class="copyw3-agile">
+		<p> © 2020 Weather Report . All rights reserved | Design by <a href="https://mukundkr.ml/" target="_blank">Mukund Kumar</a></p>
+	</div>
+	<!-- //copyright -->
+</body>
+</html>
